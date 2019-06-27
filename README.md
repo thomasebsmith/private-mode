@@ -8,6 +8,7 @@ user is protected from many forms of fingerprinting.
 Currently, private mode:
  - Enables the "privacy.resistFingerprinting" preference
  - Sets "network.http.sendRefererHeader" to 0
+ - Disables WebGL via JavaScript injection
 
-Note that these settings are reset to false and 2 respectively when Private
-Mode is disabled.
+Note that the first two settings are reset to false and 2 respectively when
+Private Mode is disabled.

@@ -8,7 +8,9 @@
     "48": "icons/48.png"
   },
   "permissions": [
-    "privacy"
+    "<all_urls>",
+    "privacy",
+    "webNavigation"
   ],
   "background": {
     "scripts": ["background.js"]

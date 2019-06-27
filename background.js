@@ -47,4 +47,15 @@ browser.browserAction.onClicked.addListener(() => {
   }
 });
 
+browser.webNavigation.onCommitted.addListener((details) => {
+  if (privateModeEnabled) {
+    browser.tabs.executeScript(details.tabId, {
+      file: "/content.js",
+      frameId: details.frameId,
+      matchAboutBlank: true,
+      runAt: "document_start"
+    });
+  }
+});
+
 enablePrivateMode();
