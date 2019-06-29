@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "Private Mode",
-  "version": "0.1",
-  "description": "Allow the toggling of privacy-related browser features",
+  "version": "0.2",
+  "description": "Allows the toggling of privacy-related browser features",
   "homepage_url": "https://github.com/thomasebsmith/private-mode",
   "icons": {
     "48": "icons/48.png"
