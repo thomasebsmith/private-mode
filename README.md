@@ -9,6 +9,7 @@ Currently, private mode:
  - Enables the "privacy.resistFingerprinting" preference
  - Sets "network.http.sendRefererHeader" to 0
  - Disables WebGL via JavaScript injection
+ - Disables IndexedDB to prevent private browsing mode detection
 
 Note that the first two settings are reset to false and 2 respectively when
 Private Mode is disabled.

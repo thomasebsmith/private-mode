@@ -17,4 +17,5 @@
     window,
     { cloneFunctions: true }
   );
+  delete window.wrappedJSObject.indexedDB;
 })();
