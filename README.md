@@ -9,7 +9,11 @@ Currently, private mode:
  - Enables the "privacy.resistFingerprinting" preference
  - Sets "network.http.sendRefererHeader" to 0
  - Disables WebGL via JavaScript injection
- - Disables IndexedDB to prevent private browsing mode detection
+ - Disables IndexedDB to prevent private browsing mode detection via
+   JavaScript injection
 
-Note that the first two settings are reset to false and 2 respectively when
-Private Mode is disabled.
+Note that the first two settings are reset to false and 2 respectively
+and JavaScript is no longer injected when Private Mode is disabled.
+
+Private Mode is not yet available on addons.mozilla.org. To use it,
+enable developer mode and load the add-on manually in about:debugging.
