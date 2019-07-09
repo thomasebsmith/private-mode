@@ -1,20 +1,32 @@
 let privateModeEnabled = false;
 
+const getEnablePromises = () => {
+  return retrieveOptions().then((features) => {
+    return [
+      browser.privacy.websites.resistFingerprinting.set({
+        value: features.antifp
+      }),
+      browser.privacy.websites.referrersEnabled.set({
+        value: !features.noreferrers
+      })
+    ];
+  });
+};
+
 const enablePrivateMode = () => {
-  Promise.all([
-    browser.privacy.websites.referrersEnabled.set({value: false}),
-    browser.privacy.websites.resistFingerprinting.set({value: true})
-  ]).then((results) => {
-    if (!results.every(x => x)) {
-      console.warn("Could not enable all privacy settings");
-      return;
-    }
-    privateModeEnabled = true;
-    browser.browserAction.setIcon({
-      path: {
-        16: "icons/16-enabled.png",
-        32: "icons/32-enabled.png"
+  return getEnablePromises().then((promises) => {
+    Promise.all(promises).then((results) => {
+      if (!results.every(x => x)) {
+        console.warn("Could not enable all privacy settings");
+        return;
       }
+      privateModeEnabled = true;
+      browser.browserAction.setIcon({
+        path: {
+          16: "icons/16-enabled.png",
+          32: "icons/32-enabled.png"
+        }
+      });
     });
   });
 };
@@ -50,6 +62,13 @@ browser.browserAction.onClicked.addListener(() => {
 browser.webNavigation.onCommitted.addListener((details) => {
   if (privateModeEnabled) {
     browser.tabs.executeScript(details.tabId, {
+      file: "/storage.js",
+      frameId: details.frameId,
+      matchAboutBlank: true,
+      runAt: "document_start"
+    });
+
+    browser.tabs.executeScript(details.tabId, {
       file: "/content.js",
       frameId: details.frameId,
       matchAboutBlank: true,
@@ -59,3 +78,5 @@ browser.webNavigation.onCommitted.addListener((details) => {
 });
 
 enablePrivateMode();
+
+onStorageChange(() => enablePrivateMode());

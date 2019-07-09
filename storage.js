@@ -1,5 +1,6 @@
 (function(global) {
-  const area = browser.storage.sync;
+  const areaName = "sync";
+  const area = browser.storage[areaName];
   const defaults = {
     antifp: true,
     nowebgl: true,
@@ -7,23 +8,50 @@
     noindexeddb: true
   };
 
-  this.storageKeys = Object.keys(defaults);
+  let cache = null;
 
-  this.storeOptions = (options) => {
+  global.storageKeys = Object.keys(defaults);
+
+  global.storeOptions = (options) => {
     return area.set({
       "features": JSON.stringify(options)
     });
   };
 
-  this.retrieveOptions = () => {
-    return area.get("features").then((settings) => {
-      const features = settings.features;
-      if (!features) {
-        return storeOptions(defaults).then(() => {
-          return defaults;
-        });
+  global.retrieveOptions = () => {
+    if (!cache) {
+      return area.get("features").then((settings) => {
+        const features = settings.features;
+        if (!features) {
+          cache = defaults;
+          return storeOptions(defaults).then(() => {
+            return defaults;
+          });
+        }
+        cache = JSON.parse(features);
+        return cache;
+      });
+    }
+    return Promise.resolve(cache);
+  };
+
+  let listeners = [];
+
+  browser.storage.onChanged.addListener((changes, changedAreaName) => {
+    if (changedAreaName === areaName && changes.features) {
+      cache = JSON.parse(changes.features.newValue);
+      for (let listener of listeners) {
+        try {
+          listener(cache);
+        }
+        catch (e) {
+          // Errors ignored
+        }
       }
-      return JSON.parse(features);
-    });
+    }
+  });
+
+  global.onStorageChange = (listener) => {
+    listeners.push(listener);
   };
 })(this);

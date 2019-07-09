@@ -3,6 +3,8 @@
     "webgl",
     "experimental-webgl"
   ];
+  
+  const oldGC = window.wrappedJSObject.HTMLCanvasElement.prototype.getContext;
   window.wrappedJSObject.HTMLCanvasElement.prototype.getContext = cloneInto(
     function(ctxt) {
       ctxt = ctxt.toString();
@@ -17,5 +19,16 @@
     window,
     { cloneFunctions: true }
   );
+
+  const oldIDB = window.wrappedJSObject.indexedDB;
   delete window.wrappedJSObject.indexedDB;
+
+  retrieveOptions().then((features) => {
+    if (!features.nowebgl) {
+      window.wrappedJSObject.HTMLCanvasElement.prototype.getContext = oldGC;
+    }
+    if (!features.noindexeddb) {
+      window.wrappedJSObject.indexedDB = oldIDB;
+    }
+  });
 })();
