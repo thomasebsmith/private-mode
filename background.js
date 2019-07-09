@@ -79,4 +79,8 @@ browser.webNavigation.onCommitted.addListener((details) => {
 
 enablePrivateMode();
 
-onStorageChange(() => enablePrivateMode());
+onStorageChange(() => {
+  if (privateModeEnabled) {
+    enablePrivateMode();
+  }
+});
