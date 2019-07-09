@@ -2,20 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="options.css">
+    <link rel="icon" href="icons/48.png">
+    <title>Private Mode | Options</title>
   </head>
   <body>
-    <form id="options-form">
-      <input type="checkbox" value="antifp" name="antifp" checked>
-      <label for="antifp">Use anti-fingerprinting measures</label>
-      <input type="checkbox" value="nowebgl" name="nowebgl" checked>
-      <label for="nowebgl">Disable WebGL</label>
-      <input type="checkbox" value="noreferrers" name="noreferrers" checked>
-      <label for="noreferrers">Disable HTTP referrers</label>
-      <input type="checkbox" value="noindexeddb" name="noindexeddb" checked>
-      <label for="noindexeddb">Disable IndexedDB</label>
-      <button type="submit">Save</button>
-      <button type="reset">Reset</button>
-    </form>
+    <header>
+      <img src="/icons/16.png">
+      <h3>Features</h3>
+    </header>
+    <article>
+      <h4>When in Private Mode:</h4>
+      <form id="options-form">
+        <div>
+          <input type="checkbox" value="antifp" name="antifp">
+          <label for="antifp">Use anti-fingerprinting measures</label>
+        </div>
+        <div>
+          <input type="checkbox" value="nowebgl" name="nowebgl">
+          <label for="nowebgl">Disable WebGL</label>
+        </div>
+        <div>
+          <input type="checkbox" value="noreferrers" name="noreferrers">
+          <label for="noreferrers">Disable HTTP referrers</label>
+        </div>
+        <div>
+          <input type="checkbox" value="noindexeddb" name="noindexeddb">
+          <label for="noindexeddb">Disable IndexedDB</label>
+        </div>
+        <div id="buttons">
+          <button type="submit">Save</button>
+          <button type="reset">Reset</button>
+        </div>
+      </form>
+    </article>
     <script src="storage.js"></script>
     <script src="options.js"></script>
   </body>

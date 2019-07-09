@@ -1,0 +1,26 @@
+body {
+  font-family: "Arial", "Helvetica", sans-serif;
+  margin: 0;
+}
+
+header {
+  border-bottom: 1px solid #DDDDDD;
+  padding: 5px;
+}
+
+header>h3 {
+  display: inline-block;
+  margin: 0;
+}
+
+article {
+  margin: 10px;
+}
+
+body>h4 {
+  margin-bottom: 5px;
+}
+
+#buttons {
+  margin-top: 20px;
+}
