@@ -13,18 +13,25 @@ const saveOptions = () => {
   storeOptions(newOptions);
 };
 
+const loadWithOptions = (options) => {
+  for (let entry of Object.entries(options)) {
+    document.getElementsByName(entry[0])[0].checked = entry[1];
+  }
+};
+
 const loadOptions = () => {
-  retrieveOptions().then((options) => {
-    for (let entry of Object.entries(options)) {
-      document.getElementsByName(entry[0])[0].checked = entry[1];
-    }
-  });
+  retrieveOptions().then(loadWithOptions);
 };
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   saveOptions();
   return false;
+});
+
+form.addEventListener("reset", (event) => {
+  event.preventDefault();
+  resetOptions().then(loadWithOptions);
 });
 
 loadOptions();

@@ -18,6 +18,12 @@
     });
   };
 
+  global.resetOptions = () => {
+    return storeOptions(defaults).then(() => {
+      return defaults;
+    });
+  };
+
   global.retrieveOptions = () => {
     if (!cache) {
       return area.get("features").then((settings) => {
