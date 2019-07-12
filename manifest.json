@@ -20,14 +20,14 @@
     "webNavigation"
   ],
   "background": {
-    "scripts": ["storage.js", "background.js"]
+    "scripts": ["util/storage.js", "background.js"]
   },
   "browser_action": {
     "default_icon": "icons/32.png",
     "default_title": "Private Mode"
   },
   "options_ui": {
-    "page": "options.html",
+    "page": "options/options.html",
     "open_in_tab": true
   }
 }
