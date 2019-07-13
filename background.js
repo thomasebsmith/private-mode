@@ -15,7 +15,7 @@ const getEnablePromises = () => {
 
 const enablePrivateMode = () => {
   return getEnablePromises().then((promises) => {
-    Promise.all(promises).then((results) => {
+    return Promise.all(promises).then((results) => {
       if (!results.every(x => x)) {
         console.warn("Could not enable all privacy settings");
         return;
@@ -32,7 +32,7 @@ const enablePrivateMode = () => {
 };
 
 const disablePrivateMode = () => {
-  Promise.all([
+  return Promise.all([
     browser.privacy.websites.referrersEnabled.set({value: true}),
     browser.privacy.websites.resistFingerprinting.set({value: false})
   ]).then((results) => {
