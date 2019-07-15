@@ -19,6 +19,9 @@ and JavaScript is no longer injected when Private Mode is disabled.
 Each of these features can also be disabled by going to the options page,
 which can be found from the link in about:addons.
 
+To toggle Private Mode, click on its icon while it is in the toolbar,
+or press Ctrl+Alt+P (Cmd+Alt+P on MacOS).
+
 ## Installation
 Private Mode is not yet available on addons.mozilla.org. To use it,
 enable developer mode and load the add-on manually in about:debugging.
