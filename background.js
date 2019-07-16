@@ -13,6 +13,27 @@ const getEnablePromises = () => {
   });
 };
 
+const getPrivateModeMenu = (enabled, isUpdate) => {
+  let result = {
+    id: "private-mode-enabled",
+    checked: enabled,
+    command: "_execute_browser_action",
+    contexts: ["all"],
+    icons: {
+      "16": "icons/16.png",
+      "32": "icons/32.png"
+    },
+    title: "Private Mode",
+    type: "checkbox"
+  };
+  if (isUpdate) {
+    delete result.icons;
+    delete result.id;
+    delete result.command;
+  }
+  return result;
+};
+
 const enablePrivateMode = () => {
   return getEnablePromises().then((promises) => {
     return Promise.all(promises).then((results) => {
@@ -27,6 +48,10 @@ const enablePrivateMode = () => {
           32: "icons/32-enabled.png"
         }
       });
+      browser.menus.update(
+        "private-mode-enabled",
+        getPrivateModeMenu(true, true)
+      );
     });
   });
 };
@@ -47,6 +72,10 @@ const disablePrivateMode = () => {
         32: "icons/32-disabled.png"
       }
     });
+    browser.menus.update(
+      "private-mode-enabled",
+      getPrivateModeMenu(false, true)
+    );
   });
 };
 
@@ -77,6 +106,7 @@ browser.webNavigation.onCommitted.addListener((details) => {
   }
 });
 
+browser.menus.create(getPrivateModeMenu(true, false));
 enablePrivateMode();
 
 onStorageChange(() => {
