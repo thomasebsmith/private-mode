@@ -1,7 +1,7 @@
 let privateModeEnabled = false;
 
 const getEnablePromises = () => {
-  return retrieveOptions().then((features) => {
+  return retrieveOptions().then(({features: features}) => {
     return [
       browser.privacy.websites.resistFingerprinting.set({
         value: features.antifp

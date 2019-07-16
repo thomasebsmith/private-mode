@@ -5,7 +5,7 @@ let lastSaved = null;
 
 const getFormData = () => {
   let object = {};
-  for (let key of storageKeys) {
+  for (let key of featureKeys) {
     object[key] = document.getElementsByName(key)[0].checked;
   }
   return object;
@@ -13,13 +13,13 @@ const getFormData = () => {
 
 const saveOptions = () => {
   const newOptions = getFormData();
-  storeOptions(newOptions);
+  storeOptions({features: newOptions});
 };
 
-const loadWithOptions = (options) => {
+const loadWithOptions = ({features: features}) => {
   unsavedChanges = false;
-  lastSaved = options;
-  for (let entry of Object.entries(options)) {
+  lastSaved = features;
+  for (let entry of Object.entries(features)) {
     document.getElementsByName(entry[0])[0].checked = entry[1];
   }
 };
