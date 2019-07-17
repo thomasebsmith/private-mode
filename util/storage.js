@@ -12,7 +12,8 @@
       nowebgl: true,
       noreferrers: true,
       noindexeddb: true
-    }
+    },
+    whitelist: {}
   });
 
   let cache = null;

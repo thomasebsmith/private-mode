@@ -1,7 +1,7 @@
 let privateModeEnabled = false;
 
 const getEnablePromises = () => {
-  return retrieveOptions().then(({features: features}) => {
+  return getGlobalFeatures().then((features) => {
     return [
       browser.privacy.websites.resistFingerprinting.set({
         value: features.antifp
@@ -92,6 +92,13 @@ browser.webNavigation.onCommitted.addListener((details) => {
   if (privateModeEnabled) {
     browser.tabs.executeScript(details.tabId, {
       file: "/util/storage.js",
+      frameId: details.frameId,
+      matchAboutBlank: true,
+      runAt: "document_start"
+    });
+
+    browser.tabs.executeScript(details.tabId, {
+      file: "/util/features.js",
       frameId: details.frameId,
       matchAboutBlank: true,
       runAt: "document_start"

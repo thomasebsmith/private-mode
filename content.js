@@ -23,7 +23,7 @@
   const oldIDB = window.wrappedJSObject.indexedDB;
   delete window.wrappedJSObject.indexedDB;
 
-  retrieveOptions().then(({features: features}) => {
+  getFeaturesForURLString(window.location.href).then((features) => {
     if (!features.nowebgl) {
       window.wrappedJSObject.HTMLCanvasElement.prototype.getContext = oldGC;
     }
