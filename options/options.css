@@ -24,3 +24,20 @@ body>h4 {
 #buttons {
   margin-top: 20px;
 }
+
+input[type=text] {
+  max-width: 300px;
+  width: 50vw;
+}
+
+button[type=button] {
+  font-weight: bold;
+}
+
+#exceptions>div>* {
+  margin-left: 10px;
+}
+
+#exceptions>div>div[data-path] {
+  margin-left: 25px;
+}

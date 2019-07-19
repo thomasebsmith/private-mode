@@ -20,9 +20,9 @@ const getFormData = () => {
   for (const key of featureKeys) {
     const elements = document.getElementsByName(key);
     for (const element of elements) {
-      if ("path" in element.parentElement.dataset) {
-        const path = element.parentElement.dataset.path;
-        const domain = element.parentElement.dataset.domain;
+      if ("path" in element.parentElement.parentElement.dataset) {
+        const path = element.parentElement.parentElement.dataset.path;
+        const domain = element.parentElement.parentElement.dataset.domain;
         if (!hasOwnProp(whitelist, domain)) {
           whitelist[domain] = {
             forDomain: null,
@@ -35,8 +35,8 @@ const getFormData = () => {
         }
         siteFeatures.byPath[path][element.value] = element.checked;
       }
-      else if ("domain" in element.parentElement.dataset) {
-        const domain = element.parentElement.dataset.domain;
+      else if ("domain" in element.parentElement.parentElement.dataset) {
+        const domain = element.parentElement.parentElement.dataset.domain;
         if (!hasOwnProp(whitelist, domain)) {
           whitelist[domain] = {
             forDomain: null,
@@ -66,27 +66,33 @@ const saveOptions = () => {
 };
 
 const insertSiteCheckboxesBefore = (insertBefore, el, features) => {
+  let div = document.createElement("div");
+  div.classList.add("checkboxes");
   let input = document.createElement("input");
   input.type = "checkbox";
   input.value = "nowebgl";
   input.name = "nowebgl";
   input.checked = features.nowebgl;
-  el.insertBefore(input, insertBefore);
+  div.appendChild(input);
   let label = document.createElement("label");
-  label.for = "nowebgl";
+  label.setAttribute("for", "nowebgl");
   label.textContent = "Disable WebGL";
-  el.insertBefore(label, insertBefore);
+  div.appendChild(label);
+  el.insertBefore(div, insertBefore);
 
+  div = document.createElement("div");
+  div.classList.add("checkboxes");
   input = document.createElement("input");
   input.type = "checkbox";
   input.value = "noindexeddb";
   input.name = "noindexeddb";
   input.checked = features.noindexeddb;
-  el.insertBefore(input, insertBefore);
+  div.appendChild(input);
   label = document.createElement("label");
-  label.for = "noindexeddb";
+  label.setAttribute("for", "noindexeddb");
   label.textContent = "Disable IndexedDB";
-  el.insertBefore(label, insertBefore);
+  div.appendChild(label);
+  el.insertBefore(div, insertBefore);
 };
 
 const appendSiteCheckboxes = (el, features) => {
@@ -183,9 +189,8 @@ const removeException = (event) => {
   }
   else {
     let toRemove = el.children[1];
-    while (toRemove.tagName.toLowerCase() === "input" ||
-           toRemove.tagName.toLowerCase() === "label" ||
-           toRemove.tagName.toLowerCase() === "button") {
+    while (toRemove && (toRemove.classList.contains("checkboxes") ||
+           toRemove.tagName.toLowerCase() === "button")) {
       let victim = toRemove;
       toRemove = toRemove.nextSibling;
       victim.parentElement.removeChild(victim);
