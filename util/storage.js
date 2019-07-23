@@ -11,7 +11,8 @@
       antifp: true,
       nowebgl: true,
       noreferrers: true,
-      noindexeddb: true
+      noindexeddb: true,
+      noserviceworkers: true
     },
     whitelist: {}
   });

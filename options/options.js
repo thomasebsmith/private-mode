@@ -93,6 +93,20 @@ const insertSiteCheckboxesBefore = (insertBefore, el, features) => {
   label.textContent = "Disable IndexedDB";
   div.appendChild(label);
   el.insertBefore(div, insertBefore);
+
+  div = document.createElement("div");
+  div.classList.add("checkboxes");
+  input = document.createElement("input");
+  input.type = "checkbox";
+  input.value = "noserviceworkers";
+  input.name = "noserviceworkers";
+  input.checked = features.noserviceworkers;
+  div.appendChild(input);
+  label = document.createElement("label");
+  label.setAttribute("for", "noserviceworkers");
+  label.textContent = "Disable service workers";
+  div.appendChild(label);
+  el.insertBefore(div, insertBefore);
 };
 
 const appendSiteCheckboxes = (el, features) => {
