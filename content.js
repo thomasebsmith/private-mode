@@ -1,7 +1,7 @@
 (function() {
   const assert = (value) => {
     if (!value) {
-      throw "Assertion failed in content.js";
+      throw new Error("Assertion failed in content.js");
     }
   };
   const hasOwnProp = (obj, prop) => {
@@ -28,6 +28,10 @@
   const restore = (grouping) => {
     assert(hasOwnProp(removedValues, grouping));
     for (let [path, descriptor] of removedValues[grouping]) {
+      if (descriptor === undefined) {
+        // Don't try to restore properties that were already gone
+        continue;
+      }
       let object = window.wrappedJSObject;
       for (let i = 0; i < path.length - 1; ++i) {
         object = object[path[i]];
@@ -41,7 +45,7 @@
     "experimental-webgl"
   ];
   
-  const oldGC = window.wrappedJSObject.HTMLCanvasElement.prototype.getContext;
+  remove(["HTMLCanvasElement", "prototype", "getContext"], "webgl");
   window.wrappedJSObject.HTMLCanvasElement.prototype.getContext = cloneInto(
     function(ctxt) {
       ctxt = ctxt.toString();
@@ -57,37 +61,47 @@
     { cloneFunctions: true }
   );
 
-  const oldIDB = window.wrappedJSObject.indexedDB;
-  delete window.wrappedJSObject.indexedDB;
+  remove(["indexedDB"], "indexeddb");
+  remove(["IDBEnvironment"], "indexeddb");
+  remove(["IDBFactory"], "indexeddb");
+  remove(["IDBOpenDBRequest"], "indexeddb");
+  remove(["IDBDatabase"], "indexeddb");
+  remove(["IDBTransaction"], "indexeddb");
+  remove(["IDBRequest"], "indexeddb");
+  remove(["IDBObjectStore"], "indexeddb");
+  remove(["IDBIndex"], "indexeddb");
+  remove(["IDBCursor"], "indexeddb");
+  remove(["IDBCursorWithValue"], "indexeddb");
+  remove(["IDBKeyRange"], "indexeddb");
+  remove(["IDBLocaleAwareKeyRange"], "indexeddb");
+  remove(["IDBVersionChangeEvent"], "indexeddb");
+  remove(["IDBVersionChangeRequest"], "indexeddb");
+  remove(["IDBDatabaseException"], "indexeddb");
+  remove(["IDBTransactionSync"], "indexeddb");
+  remove(["IDBObjectStoreSync"], "indexeddb");
+  remove(["IDBIndexSync"], "indexeddb");
+  remove(["IDBFactorySync"], "indexeddb");
+  remove(["IDBEnvironmentSync"], "indexeddb");
+  remove(["IDBDatabaseSync"], "indexeddb");
+  remove(["IDBCursorSync"], "indexeddb");
+  remove(["IDBFileHandle"], "indexeddb");
+  remove(["IDBFileRequest"], "indexeddb");
+  remove(["IDBMutableFile"], "indexeddb");
 
-  const oldNavSW = Object.getOwnPropertyDescriptor(
-    window.wrappedJSObject.Navigator.prototype,
-    "serviceWorker"
-  );
-  delete window.wrappedJSObject.Navigator.prototype.serviceWorker;
-  const oldSW = window.wrappedJSObject.ServiceWorker;
-  delete window.wrappedJSObject.ServiceWorker;
-  const oldSWContainer = window.wrappedJSObject.ServiceWorkerContainer;
-  delete window.wrappedJSObject.ServiceWorkerContainer;
-  const oldSWRegistration = window.wrappedJSObject.ServiceWorkerRegistration;
-  delete window.wrappedJSObject.ServiceWorkerRegistration;
+  remove(["Navigator", "prototype", "serviceWorker"], "serviceworkers");
+  remove(["ServiceWorker"], "serviceworkers");
+  remove(["ServiceWorkerContainer"], "serviceworkers");
+  remove(["ServiceWorkerRegistration"], "serviceworkers");
 
   getFeaturesForURLString(window.location.href).then((features) => {
     if (!features.nowebgl) {
-      window.wrappedJSObject.HTMLCanvasElement.prototype.getContext = oldGC;
+      restore("webgl");
     }
     if (!features.noindexeddb) {
-      window.wrappedJSObject.indexedDB = oldIDB;
+      restore("indexeddb");
     }
     if (!features.noserviceworkers) {
-      Object.defineProperty(
-        window.wrappedJSObject.Navigator.prototype,
-        "serviceWorker",
-        oldNavSW
-      );
-      window.wrappedJSObject.ServiceWorker = oldSW;
-      window.wrappedJSObject.ServiceWorkerContainer = oldSWContainer;
-      window.wrappedJSObject.ServiceWorkerRegistration = oldSWRegistration;
+      restore("serviceworkers");
     }
   });
 })();
