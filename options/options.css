@@ -5,7 +5,7 @@ body {
 
 header {
   border-bottom: 1px solid #DDDDDD;
-  padding: 5px;
+  padding: 5px 15px;
 }
 
 header>h3 {
@@ -14,7 +14,7 @@ header>h3 {
 }
 
 article {
-  margin: 10px;
+  margin: 20px 20vw;
 }
 
 body>h4 {
