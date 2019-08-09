@@ -60,6 +60,23 @@
     window,
     { cloneFunctions: true }
   );
+  remove(["WebGLRenderingContext"], "webgl");
+  remove(["WebGL2RenderingContext"], "webgl");
+  remove(["WebGLActiveInfo"], "webgl");
+  remove(["WebGLBuffer"], "webgl");
+  remove(["WebGLContextEvent"], "webgl");
+  remove(["WebGLFramebuffer"], "webgl");
+  remove(["WebGLProgram"], "webgl");
+  remove(["WebGLQuery"], "webgl");
+  remove(["WebGLRenderbuffer"], "webgl");
+  remove(["WebGLSampler"], "webgl");
+  remove(["WebGLShader"], "webgl");
+  remove(["WebGLShaderPrecisionFormat"], "webgl");
+  remove(["WebGLSync"], "webgl");
+  remove(["WebGLTexture"], "webgl");
+  remove(["WebGLTransformFeedback"], "webgl");
+  remove(["WebGLUniformLocation"], "webgl");
+  remove(["WebGLVertexArrayObject"], "webgl");
 
   remove(["indexedDB"], "indexeddb");
   remove(["IDBEnvironment"], "indexeddb");
