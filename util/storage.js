@@ -12,7 +12,13 @@
       nowebgl: true,
       noreferrers: true,
       noindexeddb: true,
-      noserviceworkers: true
+      noserviceworkers: true,
+      nonetworkprediction: true,
+      nopeerconnection: true,
+      privatewebrtc: true,
+      firstpartyisolate: true,
+      nopingaudits: true,
+      trackingprotection: true
     },
     whitelist: {}
   });
