@@ -26,3 +26,4 @@ or press Ctrl+Alt+P (Cmd+Alt+P on MacOS).
 ## Installation
 Private Mode is not yet available on addons.mozilla.org. To use it,
 enable developer mode and load the add-on manually in about:debugging.
+Unfortunately, the add-on must be reloaded every time the brower is restarted.
