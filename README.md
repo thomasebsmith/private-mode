@@ -24,6 +24,9 @@ To toggle Private Mode, click on its icon while it is in the toolbar,
 or press Ctrl+Alt+P (Cmd+Alt+P on MacOS).
 
 ## Installation
-Private Mode is not yet available on addons.mozilla.org. To use it,
-enable developer mode and load the add-on manually in about:debugging.
-Unfortunately, the add-on must be reloaded every time the brower is restarted.
+To install Private Mode, navigate to
+[Releases](https://github.com/thomasebsmith/private-mode/releases) and
+download the latest `signed.xpi` file. Then, go to [about:addons](about:addons),
+then "Extensions", then click on the gear in the upper right corner of the page.
+Choose "Install Add-on From File", and select the `signed.xpi` file you just
+downloaded.
