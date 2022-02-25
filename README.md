@@ -26,7 +26,5 @@ or press Ctrl+Alt+P (Cmd+Alt+P on MacOS).
 ## Installation
 To install Private Mode, navigate to
 [Releases](https://github.com/thomasebsmith/private-mode/releases) and
-download the latest `signed.xpi` file. Then, go to [about:addons](about:addons),
-then "Extensions", then click on the gear in the upper right corner of the page.
-Choose "Install Add-on From File", and select the `signed.xpi` file you just
-downloaded.
+click on the latest `signed.xpi` file. Allow extension installation, and
+give Private Mode the permissions it needs.
