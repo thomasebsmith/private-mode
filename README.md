@@ -1,7 +1,7 @@
 # Private Mode
 ##### A Firefox add-on for quickly enabling and disabling privacy features
 
-Private Mode is an add-on for Firefox (version 58.0 or higher). It provides
+Private Mode is an add-on for Firefox (version 59.0 or higher). It provides
 a button that can be used to toggle "Private Mode": a state in which the
 user is protected from many forms of fingerprinting.
 

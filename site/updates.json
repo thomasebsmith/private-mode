@@ -1,0 +1,15 @@
+{
+  "addons": {
+    "privateMode@thomasebsmith.github.io": {
+      "updates": [
+        {
+          "version": "0.6",
+          "update_link": "https://github.com/thomasebsmith/private-mode/releases/download/0.6/signed.xpi",
+          "applications": {
+            "gecko": { "strict_min_version": "59.0" }
+          }
+        }
+      ]
+    }
+  }
+}

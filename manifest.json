@@ -8,10 +8,13 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "privateMode@thomasebsmith.github.io",
-      "strict_min_version": "59.0"
+      "strict_min_version": "59.0",
+      "update_url": "https://thomasebsmith.github.io/private-mode/updates.json"
     }
   },
   "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
     "48": "icons/48.png"
   },
   "permissions": [
