@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Private Mode",
   "author": "Thomas Smith",
-  "version": "0.6",
+  "version": "0.7",
   "description": "Allows the toggling of privacy-related browser features.",
   "homepage_url": "https://github.com/thomasebsmith/private-mode",
   "browser_specific_settings": {
